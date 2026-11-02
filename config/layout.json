@@ -1,0 +1,18 @@
+{
+  "primitive": 376,
+  "localPlayer": 280,
+  "children": 112,
+  "realDataModel": 504,
+  "classDescriptor": 24,
+  "position": 212,
+  "version": "version-5a21b87bbc2641cf",
+  "value": 160,
+  "placeId": 384,
+  "name": 104,
+  "fakePointer": 147875328,
+  "className": 8,
+  "cameraRotation": 192,
+  "cameraPosition": 228,
+  "cameraFieldOfView": 296,
+  "guiText": 2976
+}

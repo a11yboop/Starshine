@@ -1,0 +1,11 @@
+.tools/
+build/
+dist/
+recordings/
+logs/
+control/
+profiles/
+.updates/
+*.exe
+config/lobby-test.json
+*.tmp
