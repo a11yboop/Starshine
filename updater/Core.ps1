@@ -68,7 +68,8 @@ function Get-StarshineReleases {
  [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
  $all=@()
  for($page=1;$page -le 10;$page++){
-  $batch=@(Invoke-RestMethod -Uri ('https://api.github.com/repos/a11yboop/Starshine/releases?per_page=100&page='+$page) -Headers @{'User-Agent'='Starshine-Updater';'Accept'='application/vnd.github+json'} -TimeoutSec 20)
+  $response=Invoke-RestMethod -Uri ('https://api.github.com/repos/a11yboop/Starshine/releases?per_page=100&page='+$page) -Headers @{'User-Agent'='Starshine-Updater';'Accept'='application/vnd.github+json'} -TimeoutSec 20
+  $batch=@($response)
   $all+=@($batch|Where-Object {!$_.draft -and !$_.prerelease -and $_.tag_name -match '^v\d+\.\d+\.\d+$' -and @($_.assets|Where-Object name -eq 'Starshine-win-x64.zip').Count -eq 1 -and @($_.assets|Where-Object name -eq 'Starshine-win-x64.zip.sha256').Count -eq 1})
   if($batch.Count -lt 100){break}
  }
