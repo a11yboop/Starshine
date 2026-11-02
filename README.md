@@ -8,7 +8,7 @@ Download **Starshine-win-x64.zip** from [Releases](https://github.com/a11yboop/S
 
 ## Updates and version selection
 
-The launcher checks GitHub Releases in the background. Click **Versions**, select a published version and click **Install selected version**. The launcher downloads the package, verifies SHA-256 checksums, closes, installs and restarts. You can choose an earlier compatible release in the same list. The first release is v0.5.0; additional choices appear when more releases are published.
+The launcher checks GitHub Releases in the background. Click **Versions**, select a published version and click **Install selected version**. The launcher downloads the package, verifies SHA-256 checksums, closes, installs and restarts. You can choose an earlier compatible release in the same list. The first stable release is v0.5.1; additional choices appear when more releases are published.
 
 Updating requires the macro to be stopped. Records, logs, per-record lobby settings and custom upgrade prices are retained. Versioned Roblox offsets and unit/map definitions are updated with the program. Replaced files are backed up under `.updates`; installation failures trigger rollback. Backups are retained. Older releases may not understand recordings produced by newer versions; keep your recordings backed up before downgrading. The updater does not bypass Roblox version mismatches.
 
@@ -20,7 +20,7 @@ Roblox updates can require new offsets in `config/layout.json`. Complete game ru
 
 ## Build and test
 
-Run `build.ps1` with llvm-mingw 20261020 extracted under `.tools/llvm-mingw-20261020-ucrt-x86_64`. This builds the native launcher/recorder and runs core tests. UI check: `powershell -NoProfile -STA -File Launcher.ps1 -CheckOnly`. Package: `powershell -File scripts/Package.ps1 -Version 0.5.0`. Update integration tests: `powershell -File tests/updater_tests.ps1 -Package <release-folder>`.
+Run `build.ps1` with llvm-mingw 20261020 extracted under `.tools/llvm-mingw-20261020-ucrt-x86_64`. This builds the native launcher/recorder and runs core tests. UI check: `powershell -NoProfile -STA -File Launcher.ps1 -CheckOnly`. Package: `powershell -File scripts/Package.ps1 -Version 0.5.1`. Update integration tests: `powershell -File tests/updater_tests.ps1 -Package <release-folder>`.
 
 To publish another release, update `app-version.json`, build, test and package the same version, then attach `Starshine-win-x64.zip` and its `.sha256` file to a GitHub release tagged `vX.Y.Z`. Only non-prerelease releases with both assets appear in the updater. Release packages contain code and defaults only, never personal recordings.
 

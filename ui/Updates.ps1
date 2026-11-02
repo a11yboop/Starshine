@@ -29,7 +29,9 @@ function Show-UpdateVersions {
    $asset=@($release.assets|Where-Object name -eq 'Starshine-win-x64.zip')[0];$checksum=@($release.assets|Where-Object name -eq 'Starshine-win-x64.zip.sha256')[0]
    $prefix='https://github.com/a11yboop/Starshine/releases/download/'+$release.tag_name+'/'
    foreach($a in @($asset,$checksum)){if(!$a.browser_download_url.StartsWith($prefix,[StringComparison]::Ordinal)){throw 'Unexpected release download URL'}}
-   $hashText=(Invoke-WebRequest -UseBasicParsing -Uri $checksum.browser_download_url -TimeoutSec 30).Content
+   $checksumFile=Join-Path $job 'checksum.txt'
+   Invoke-WebRequest -UseBasicParsing -Uri $checksum.browser_download_url -OutFile $checksumFile -TimeoutSec 30
+   $hashText=Get-Content -LiteralPath $checksumFile -Raw
    $hash=($hashText.Trim() -split '\s+')[0]
    Invoke-WebRequest -UseBasicParsing -Uri $asset.browser_download_url -OutFile $zip -TimeoutSec 180
    $manifest=Expand-UpdatePackage $zip $stage $hash
